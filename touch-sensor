@@ -1,0 +1,18 @@
+#include <Arduino.h>
+#define LED_BUILTIN 2
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  if (touchRead(32) < 30)   //touchRead function detects the touch where 32 is threshold value
+  {
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+  else{
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  delay(100);
+}
