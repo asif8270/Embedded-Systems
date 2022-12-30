@@ -1,0 +1,39 @@
+#include <Arduino.h>
+#include "WiFi.h"
+#include "ThingSpeak.h"
+
+#define WIFI_NETWORK "ABC"  //Enter your wifi name
+#define WIFI_PASSWORD "123"  //Enter your wifi password
+#define WIFI_TIMEOUT_MS 20000
+
+void connect_wifi(){
+  Serial.print("connecting to wifi...");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(WIFI_NETWORK, WIFI_PASSWORD);
+
+  unsigned long startAtemptime = millis();
+
+  while (WiFi.status() != WL_CONNECTED && millis() - startAtemptime < WIFI_TIMEOUT_MS)
+  {
+    Serial.print(".");
+    delay(100);
+  }
+
+  if (WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print(" Failed!");
+  }else
+  {
+    Serial.print(" Connected!");
+    Serial.println(WiFi.localIP());
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  connect_wifi();
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+}
